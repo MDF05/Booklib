@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RatingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -56,6 +57,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     
     // User book loan actions
     Route::post('book-loans/{bookLoan}/return', [BookLoanController::class, 'return'])->name('book-loans.return');
+
+    // User profile routes
+    Route::get('profile', [UserController::class, 'showProfile'])->name('profile.show');
+    Route::get('profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+    Route::post('profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
 });
 
 // Admin Routes

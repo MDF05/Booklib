@@ -66,10 +66,22 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $loan->loan_date->format('M d, Y') }}</div>
+                                <div class="text-sm text-gray-900">
+                                    @if($loan->loan_date)
+                                        {{ $loan->loan_date->format('M d, Y') }}
+                                    @else
+                                        -
+                                    @endif
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $loan->return_date->format('M d, Y') }}</div>
+                                <div class="text-sm text-gray-900">
+                                    @if($loan->return_date)
+                                        {{ $loan->return_date->format('M d, Y') }}
+                                    @else
+                                        -
+                                    @endif
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 

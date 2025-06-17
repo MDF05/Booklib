@@ -22,7 +22,7 @@
                             <i class="fas fa-book text-6xl text-indigo-400"></i>
                         </div>
                     @endif
-                    @if($book->available_copies > 0)
+                    @if($book->quantity > 0)
                         <div class="absolute top-4 right-4 bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
                             Available
                         </div>
@@ -57,7 +57,7 @@
                                 <p class="text-sm text-gray-500 mb-1">Available Copies</p>
                                 <p class="text-gray-900 font-medium flex items-center">
                                     <i class="fas fa-book-open mr-2 text-indigo-500"></i>
-                                    {{ $book->available_copies }} of {{ $book->total_copies }}
+                                    {{ $book->quantity }}
                                 </p>
                             </div>
                             <div class="bg-gray-50 p-4 rounded-lg">
@@ -84,10 +84,10 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4">
-                        @if($book->available_copies > 0 && auth()->check())
+                        @if($book->quantity > 0 && auth()->check())
                             <a href="{{ route('book-loans.create', $book) }}" class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200">
                                 <i class="fas fa-book-reader mr-2"></i>
-                                Borrow Book
+                                Ajukan Pinjaman
                             </a>
                         @endif
                         <a href="{{ route('books.index') }}" class="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200">
