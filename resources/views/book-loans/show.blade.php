@@ -14,7 +14,7 @@
                     <div class="sm:w-1/3">
                         <div class="aspect-w-2 aspect-h-3 rounded-lg overflow-hidden shadow-lg">
                             @if($bookLoan->book->cover_image)
-                                <img src="{{ asset('storage/' . $bookLoan->book->cover_image) }}" alt="{{ $bookLoan->book->title }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('storage/cover/' . $bookLoan->book->cover_image) }}" alt="{{ $bookLoan->book->title }}" class="w-full h-full object-cover">
                             @else
                                 <div class="w-full h-full bg-gray-200 flex items-center justify-center">
                                     <span class="text-gray-400">No cover</span>

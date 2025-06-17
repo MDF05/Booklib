@@ -58,9 +58,19 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        $user = auth()->user();
+        $hasBorrowed = false;
+
+        if ($user) {
+            $hasBorrowed = $book->bookLoans()
+                ->where('user_id', $user->id)
+                ->where('status', 'approved')
+                ->exists();
+        }
+
         $ratings = $book->ratings()->with('user')->latest()->get();
         $comments = $book->comments()->with('user')->latest()->get();
-        return view('books.show', compact('book', 'ratings', 'comments'));
+        return view('books.show', compact('book', 'ratings', 'comments', 'hasBorrowed'));
     }
 
     /**

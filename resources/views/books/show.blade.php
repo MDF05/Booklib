@@ -16,7 +16,7 @@
             <div class="lg:w-1/3">
                 <div class="aspect-w-2 aspect-h-3 rounded-lg overflow-hidden shadow-lg relative group">
                     @if($book->cover_image)
-                        <img src="{{ asset('storage/' . $book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('storage/cover/' . $book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
                     @else
                         <div class="w-full h-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
                             <i class="fas fa-book text-6xl text-indigo-400"></i>

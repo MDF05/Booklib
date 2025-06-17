@@ -48,26 +48,27 @@
         <!-- Books Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @forelse($books as $book)
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="aspect-w-2 aspect-h-3 relative">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex flex-col">
+                    <div class="w-full aspect-w-2 aspect-h-3 bg-gray-100 flex items-center justify-center relative" style="min-height: 240px; max-height: 320px;">
                         @if($book->cover_image)
-                            <img src="{{ asset('storage/' . $book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover">
+                            <img src="{{ asset('storage/cover/' . $book->cover_image) }}" alt="{{ $book->title }}" class="object-cover w-full h-full" style="max-height: 320px; min-height: 240px;" loading="lazy">
                         @else
-                            <div class="w-full h-full bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center">
-                                <i class="fas fa-book text-4xl text-indigo-400"></i>
+                            <div class="flex flex-col items-center justify-center w-full h-full">
+                                <i class="fas fa-book text-6xl text-indigo-200 mb-2"></i>
+                                <span class="text-gray-400">No cover</span>
                             </div>
                         @endif
-                        @if($book->available_copies > 0)
-                            <div class="absolute top-2 right-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                        @if($book->quantity > 0)
+                            <div class="absolute top-2 right-2 text-white text-xs px-3 py-1 rounded-full font-bold border border-white shadow z-10" style="background-color: #16a34a;">
                                 Available
                             </div>
                         @else
-                            <div class="absolute top-2 right-2 bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">
+                            <div class="absolute top-2 right-2 text-white text-xs px-3 py-1 rounded-full font-bold border border-white shadow z-10" style="background-color: #dc2626;">
                                 Unavailable
                             </div>
                         @endif
                     </div>
-                    <div class="p-4">
+                    <div class="p-4 flex-1 flex flex-col">
                         <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{{ $book->title }}</h3>
                         <p class="text-sm text-gray-600 mb-2 flex items-center">
                             <i class="fas fa-user-edit mr-2 text-indigo-500"></i>
@@ -76,23 +77,15 @@
                         <div class="flex items-center justify-between mb-4">
                             <span class="text-sm text-gray-500 flex items-center">
                                 <i class="fas fa-book-open mr-1 text-indigo-500"></i>
-                                {{ $book->available_copies }} available
+                                {{ $book->quantity }} available
                             </span>
-                            <div class="flex items-center">
-                                <div class="flex items-center">
-                                    @for($i = 1; $i <= 5; $i++)
-                                        <i class="fas fa-star {{ $i <= round($book->average_rating) ? 'text-yellow-400' : 'text-gray-300' }} text-sm"></i>
-                                    @endfor
-                                </div>
-                                <span class="ml-1 text-sm text-gray-600">({{ number_format($book->average_rating, 1) }})</span>
-                            </div>
                         </div>
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 mt-auto">
                             <a href="{{ route('books.show', $book) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200">
                                 <i class="fas fa-info-circle mr-2"></i>
                                 Details
                             </a>
-                            @if($book->available_copies > 0)
+                            @if($book->quantity > 0)
                                 <a href="{{ route('book-loans.create', $book) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
                                     <i class="fas fa-book-reader mr-2"></i>
                                     Borrow
