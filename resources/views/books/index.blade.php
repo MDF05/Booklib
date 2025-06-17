@@ -20,14 +20,14 @@
         <form action="{{ route('books.index') }}" method="GET" class="mb-8 bg-gray-50 p-4 rounded-lg">
             <div class="flex flex-col sm:flex-row gap-4">
                 <div class="flex-1">
-                    <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search Books</label>
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-search text-gray-400 mr-2"></i>
+                        <label for="search" class="text-sm font-medium text-gray-700">Search Books</label>
+                    </div>
                     <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <i class="fas fa-search text-gray-400"></i>
-                        </div>
                         <input type="text" id="search" name="search" value="{{ request('search') }}" 
                             placeholder="Search by title, author, or ISBN..." 
-                            class="pl-10 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     </div>
                 </div>
                 <div class="flex items-end gap-2">

@@ -20,7 +20,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-50">
         <!-- Navigation -->
-        <nav class="bg-white border-b border-gray-100 shadow-sm" x-data="{ open: false }">
+        <nav class="bg-white border-b border-gray-100 shadow-sm" x-data="{ open: false, profileOpen: false }">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
                     <div class="flex">
@@ -56,7 +56,7 @@
                     <!-- Settings Dropdown - Desktop -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         @auth
-                            <div class="ml-3 relative" x-data="{ open: false }">
+                            <div class="ml-3 relative" x-data="{ open: false }" @click.away="open = false">
                                 <div>
                                     <button @click="open = !open" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
                                         <div class="flex items-center">
@@ -73,7 +73,7 @@
                                     </button>
                                 </div>
 
-                                <div x-show="open" @click.away="open = false" class="absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg origin-top-right">
+                                <div x-show="open" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-50 mt-2 w-48 rounded-md shadow-lg origin-top-right" >
                                     <div class="rounded-md ring-1 ring-black ring-opacity-5 py-1 bg-white">
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
@@ -191,5 +191,6 @@
     </div>
 
     @stack('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html> 
