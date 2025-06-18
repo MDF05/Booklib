@@ -40,4 +40,34 @@ class BookLoanController extends Controller
         return redirect()->route('admin.loans.show', $bookLoan)
             ->with('success', 'Book loan has been rejected.');
     }
+
+    public function approveReturn(BookLoan $bookLoan)
+    {
+        if ($bookLoan->status !== 'return_pending') {
+            return redirect()->back()->with('error', 'Invalid return request.');
+        }
+
+        $bookLoan->update([
+            'status' => 'returned',
+            'return_date' => now()
+        ]);
+        $bookLoan->book->increment('quantity');
+
+        return redirect()->route('admin.loans.show', $bookLoan)
+            ->with('success', 'Book return has been approved.');
+    }
+
+    public function rejectReturn(BookLoan $bookLoan)
+    {
+        if ($bookLoan->status !== 'return_pending') {
+            return redirect()->back()->with('error', 'Invalid return request.');
+        }
+
+        $bookLoan->update([
+            'status' => 'approved'
+        ]);
+
+        return redirect()->route('admin.loans.show', $bookLoan)
+            ->with('success', 'Book return has been rejected.');
+    }
 } 

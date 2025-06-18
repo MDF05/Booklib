@@ -115,17 +115,16 @@ class BookLoanController extends Controller
 
     public function return(BookLoan $bookLoan)
     {
-        if ($bookLoan->status !== 'approved') {
-            return redirect()->back()->with('error', 'This loan cannot be returned.');
+        if (auth()->id() !== $bookLoan->user_id) {
+            abort(403, 'This action is unauthorized.');
         }
 
         $bookLoan->update([
-            'status' => 'returned',
-            'return_date' => now()
+            'status' => 'return_pending',
+            'return_date' => null
         ]);
-        $bookLoan->book->increment('quantity');
 
         return redirect()->route('book-loans.index')
-            ->with('success', 'Book returned successfully.');
+            ->with('success', 'Return request submitted. Waiting for admin approval.');
     }
 }

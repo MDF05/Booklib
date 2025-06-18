@@ -73,4 +73,6 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     Route::get('/loans/{bookLoan}', [App\Http\Controllers\Admin\BookLoanController::class, 'show'])->name('loans.show');
     Route::post('/book-loans/{bookLoan}/approve', [App\Http\Controllers\Admin\BookLoanController::class, 'approve'])->name('book-loans.approve');
     Route::post('/book-loans/{bookLoan}/reject', [App\Http\Controllers\Admin\BookLoanController::class, 'reject'])->name('book-loans.reject');
+    Route::post('/book-loans/{bookLoan}/approve-return', [App\Http\Controllers\Admin\BookLoanController::class, 'approveReturn'])->name('book-loans.approve-return');
+    Route::post('/book-loans/{bookLoan}/reject-return', [App\Http\Controllers\Admin\BookLoanController::class, 'rejectReturn'])->name('book-loans.reject-return');
 });

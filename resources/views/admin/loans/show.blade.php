@@ -88,6 +88,23 @@
                         </form>
                     </div>
                 @endif
+
+                @if($bookLoan->status === 'return_pending')
+                    <div class="mt-8 flex space-x-4">
+                        <form action="{{ route('admin.book-loans.approve-return', $bookLoan) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700">
+                                <i class="fas fa-check mr-2"></i> Approve Return
+                            </button>
+                        </form>
+                        <form action="{{ route('admin.book-loans.reject-return', $bookLoan) }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700">
+                                <i class="fas fa-times mr-2"></i> Reject Return
+                            </button>
+                        </form>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
