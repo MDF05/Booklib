@@ -3,7 +3,7 @@
 @section('content')
 <div class="min-h-screen bg-gray-50 py-8">
     <div class="max-w-3xl mx-auto" >
-        <div class="bg-gray-200 shadow-lg rounded-xl p-8">
+        <div class="bg-white shadow-lg rounded-xl p-8">
             <h1 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
                 <i class="fas fa-star text-yellow-400 mr-2"></i> My Reviews
             </h1>

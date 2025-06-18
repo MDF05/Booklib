@@ -71,6 +71,7 @@ Route::middleware(['web', 'auth', \App\Http\Middleware\AdminMiddleware::class])-
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::get('/loans', [AdminController::class, 'loans'])->name('loans');
+    Route::get('/loans/{bookLoan}', [App\Http\Controllers\Admin\BookLoanController::class, 'show'])->name('loans.show');
     Route::post('/book-loans/{bookLoan}/approve', [BookLoanController::class, 'approve'])->name('book-loans.approve');
     Route::post('/book-loans/{bookLoan}/reject', [BookLoanController::class, 'reject'])->name('book-loans.reject');
 });

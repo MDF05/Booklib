@@ -45,11 +45,23 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
                             <p class="text-sm text-gray-500">Loan Date</p>
-                            <p class="text-gray-900">{{ $bookLoan->loan_date->format('M d, Y') }}</p>
+                            <div class="text-sm text-gray-900">
+                                @if($bookLoan->loan_date)
+                                    {{ $bookLoan->loan_date->format('M d, Y') }}
+                                @else
+                                    -
+                                @endif
+                            </div>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Expected Return Date</p>
-                            <p class="text-gray-900">{{ $bookLoan->return_date->format('M d, Y') }}</p>
+                            <div class="text-sm text-gray-900">
+                                @if($bookLoan->return_date)
+                                    {{ $bookLoan->return_date->format('M d, Y') }}
+                                @else
+                                    -
+                                @endif
+                            </div>
                         </div>
                         <div>
                             <p class="text-sm text-gray-500">Status</p>

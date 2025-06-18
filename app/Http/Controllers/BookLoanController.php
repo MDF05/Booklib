@@ -63,7 +63,9 @@ class BookLoanController extends Controller
      */
     public function show(BookLoan $bookLoan)
     {
-        $this->authorize('view', $bookLoan);
+        if (auth()->user()->role !== 'admin' && auth()->id() !== $bookLoan->user_id) {
+            abort(403, 'This action is unauthorized.');
+        }
         return view('book-loans.show', compact('bookLoan'));
     }
 

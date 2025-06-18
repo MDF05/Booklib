@@ -62,16 +62,7 @@ class AdminController extends Controller
 
     public function loans()
     {
-        Log::info('AdminController@loans: Accessing loans page', [
-            'user' => auth()->user(),
-            'is_authenticated' => auth()->check(),
-            'role' => auth()->check() ? auth()->user()->role : null
-        ]);
-
-        $loans = BookLoan::with(['user', 'book'])
-            ->latest()
-            ->paginate(10);
-
-        return view('admin.loans.index', compact('loans'));
+        $bookLoans = BookLoan::with(['user', 'book'])->latest()->paginate(10);
+        return view('admin.loans.index', compact('bookLoans'));
     }
 }
