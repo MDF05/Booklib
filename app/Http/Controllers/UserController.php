@@ -42,4 +42,10 @@ class UserController extends Controller
 
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully.');
     }
+
+    public function myReviews()
+    {
+        $reviews = auth()->user()->reviews()->with('book')->latest()->paginate(10);
+        return view('users.my-reviews', compact('reviews'));
+    }
 } 

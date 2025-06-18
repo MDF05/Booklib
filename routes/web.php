@@ -62,6 +62,8 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('profile', [UserController::class, 'showProfile'])->name('profile.show');
     Route::get('profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
     Route::post('profile/update', [UserController::class, 'updateProfile'])->name('profile.update');
+    // My Reviews
+    Route::get('my-reviews', [UserController::class, 'myReviews'])->name('users.my-reviews');
 });
 
 // Admin Routes

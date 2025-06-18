@@ -52,7 +52,7 @@
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 h-10 w-10">
                                         @if($loan->book->cover_image)
-                                            <img src="{{ asset('storage/' . $loan->book->cover_image) }}" alt="{{ $loan->book->title }}" class="h-10 w-10 object-cover rounded">
+                                            <img src="{{ asset('storage/cover/' . $loan->book->cover_image) }}" alt="{{ $loan->book->title }}" class="h-10 w-10 object-cover rounded">
                                         @else
                                             <div class="h-10 w-10 bg-gray-200 rounded flex items-center justify-center">
                                                 <span class="text-gray-400 text-xs">No cover</span>
@@ -84,7 +84,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                                     {{ $loan->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
                                     {{ $loan->status === 'approved' ? 'bg-green-100 text-green-800' : '' }}
                                     {{ $loan->status === 'rejected' ? 'bg-red-100 text-red-800' : '' }}
@@ -113,4 +113,4 @@
         </div>
     </div>
 </div>
-@endsection 
+@endsection
