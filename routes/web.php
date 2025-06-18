@@ -66,12 +66,11 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('my-reviews', [UserController::class, 'myReviews'])->name('users.my-reviews');
 });
 
-// Admin Routes
-Route::middleware(['web', 'auth', \App\Http\Middleware\AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
+// Admin routes
+Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/users', [AdminController::class, 'users'])->name('users');
     Route::get('/loans', [AdminController::class, 'loans'])->name('loans');
     Route::get('/loans/{bookLoan}', [App\Http\Controllers\Admin\BookLoanController::class, 'show'])->name('loans.show');
-    Route::post('/book-loans/{bookLoan}/approve', [BookLoanController::class, 'approve'])->name('book-loans.approve');
-    Route::post('/book-loans/{bookLoan}/reject', [BookLoanController::class, 'reject'])->name('book-loans.reject');
+    Route::post('/book-loans/{bookLoan}/approve', [App\Http\Controllers\Admin\BookLoanController::class, 'approve'])->name('book-loans.approve');
+    Route::post('/book-loans/{bookLoan}/reject', [App\Http\Controllers\Admin\BookLoanController::class, 'reject'])->name('book-loans.reject');
 });
