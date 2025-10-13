@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description');
             $table->integer('quantity')->default(0);
             $table->date('published_date')->nullable();
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }

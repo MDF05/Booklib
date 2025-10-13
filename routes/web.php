@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookLoanController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\UserController;
@@ -75,4 +76,7 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     Route::post('/book-loans/{bookLoan}/reject', [App\Http\Controllers\Admin\BookLoanController::class, 'reject'])->name('book-loans.reject');
     Route::post('/book-loans/{bookLoan}/approve-return', [App\Http\Controllers\Admin\BookLoanController::class, 'approveReturn'])->name('book-loans.approve-return');
     Route::post('/book-loans/{bookLoan}/reject-return', [App\Http\Controllers\Admin\BookLoanController::class, 'rejectReturn'])->name('book-loans.reject-return');
+    
+    // Admin reviews routes
+    Route::resource('reviews', AdminReviewController::class)->only(['index', 'show', 'destroy']);
 });
