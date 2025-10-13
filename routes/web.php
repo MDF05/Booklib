@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookLoanController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
@@ -55,6 +56,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('books/{book}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::put('comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    
+    // Review routes
+    Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
     
     // User book loan actions
     Route::post('book-loans/{bookLoan}/return', [BookLoanController::class, 'return'])->name('book-loans.return');
