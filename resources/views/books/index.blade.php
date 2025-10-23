@@ -1,12 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @if (session('success'))
-        <div class="mb-4 p-4 bg-green-100 border border-green-300 text-green-700 rounded">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         <div class="p-6 bg-white border-b border-gray-200">
             <div class="flex justify-between items-center mb-6">
@@ -15,11 +9,11 @@
                     <p class="text-sm text-gray-600 mt-1">Discover and borrow books from our collection</p>
                 </div>
                 @if (auth()->user()->role === 'admin')
-                    <!-- Trigger button -->
-                    <button type="button" data-modal-target="addMultipleBooksModal" data-modal-toggle="addMultipleBooksModal"
-                        class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 transition">
-                        <i class="fas fa-plus mr-2"></i> Add Multiple Books
-                    </button>
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors duration-200">
+                        <i class="fas fa-plus mr-2"></i>
+                        Add New Book
+                    </a>
                 @endif
 
             </div>
@@ -129,116 +123,6 @@
             <div class="mt-8">
                 {{ $books->links() }}
             </div>
-
-
-
-            <!-- Modal Add Multiple Books -->
-            <div id="addMultipleBooksModal" tabindex="-1" aria-hidden="true"
-                class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
-                <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-4xl p-6 animate-fade-in-up">
-                    <div class="flex justify-between items-center border-b pb-3 mb-4">
-                        <h3 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
-                            <i class="fas fa-layer-group text-indigo-600"></i> Add Multiple Books
-                        </h3>
-                        <button type="button" data-modal-hide="addMultipleBooksModal"
-                            class="text-gray-400 hover:text-gray-600 transition">
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-
-                    <form action="{{ route('books.storeMultiple') }}" method="POST" enctype="multipart/form-data"
-                        class="space-y-6">
-                        @csrf
-                        <div id="books-container" class="space-y-6">
-                            <div class="book-item bg-gray-50 border border-gray-200 rounded-xl p-4">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Title</label>
-                                        <input type="text" name="books[0][title]"
-                                            class="mt-1 w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-                                            required>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Author</label>
-                                        <input type="text" name="books[0][author]"
-                                            class="mt-1 w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
-                                            required>
-                                    </div>
-                                    <div class="md:col-span-2">
-                                        <label class="block text-sm font-medium text-gray-700">Description</label>
-                                        <textarea name="books[0][description]" rows="2"
-                                            class="mt-1 w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Quantity</label>
-                                        <input type="number" name="books[0][quantity]" min="0" value="0"
-                                            class="mt-1 w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Published Date</label>
-                                        <input type="date" name="books[0][published_date]"
-                                            class="mt-1 w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700">Cover Image</label>
-                                        <input type="file" name="books[0][cover_image]" accept="image/*"
-                                            class="mt-1 w-full rounded-md border-gray-300 focus:ring-indigo-500 focus:border-indigo-500">
-                                        <img class="img-preview mt-2 rounded-lg shadow-md hidden"
-                                            style="max-width: 100px;">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-between items-center">
-                            <button type="button" id="addBookBtn"
-                                class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition">
-                                <i class="fas fa-plus mr-2"></i> Add Another Book
-                            </button>
-                            <button type="submit"
-                                class="inline-flex items-center px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 transition">
-                                <i class="fas fa-save mr-2"></i> Save All
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <script>
-                let bookIndex = 1;
-
-                document.getElementById('addBookBtn').addEventListener('click', () => {
-                    const container = document.getElementById('books-container');
-                    const firstBook = container.firstElementChild.cloneNode(true);
-
-                    firstBook.querySelectorAll('input, textarea').forEach((el) => {
-                        const name = el.getAttribute('name');
-                        el.setAttribute('name', name.replace(/\d+/, bookIndex));
-                        el.value = '';
-                        if (el.type === 'file') el.value = null;
-                    });
-
-                    firstBook.querySelector('.img-preview').classList.add('hidden');
-                    container.appendChild(firstBook);
-                    bookIndex++;
-                });
-
-                // Preview Gambar
-                document.addEventListener('change', function(e) {
-                    if (e.target.matches('input[type="file"][name*="[cover_image]"]')) {
-                        const file = e.target.files[0];
-                        const preview = e.target.closest('.book-item').querySelector('.img-preview');
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = ev => {
-                                preview.src = ev.target.result;
-                                preview.classList.remove('hidden');
-                            };
-                            reader.readAsDataURL(file);
-                        } else {
-                            preview.classList.add('hidden');
-                        }
-                    }
-                });
-            </script>
-        @endsection
+        </div>
+    </div>
+@endsection

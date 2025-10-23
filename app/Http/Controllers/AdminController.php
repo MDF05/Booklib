@@ -23,7 +23,7 @@ class AdminController extends Controller
         $totalLoans = BookLoan::count();
         $pendingLoans = BookLoan::where('status', 'pending')->count();
         $activeLoans = BookLoan::where('status', 'approved')->count();
-
+        
         $recentLoans = BookLoan::with(['user', 'book'])
             ->latest()
             ->take(5)
@@ -65,6 +65,4 @@ class AdminController extends Controller
         $bookLoans = BookLoan::with(['user', 'book'])->latest()->paginate(10);
         return view('admin.loans.index', compact('bookLoans'));
     }
-
-
 }

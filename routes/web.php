@@ -40,29 +40,26 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['web', 'auth'])->group(function () {
     // Book routes
     Route::resource('books', BookController::class);
-      Route::post('/books/store-multiple', [BookController::class, 'storeMultiple'])->name('books.storeMultiple');
-
-
-
+    
     // Book loan routes
     Route::get('books/{book}/loan', [BookLoanController::class, 'create'])->name('book-loans.create');
     Route::post('books/{book}/loan', [BookLoanController::class, 'store'])->name('book-loans.store');
     Route::get('book-loans', [BookLoanController::class, 'index'])->name('book-loans.index');
     Route::get('book-loans/{bookLoan}', [BookLoanController::class, 'show'])->name('book-loans.show');
-
+    
     // Rating routes
     Route::post('books/{book}/ratings', [RatingController::class, 'store'])->name('ratings.store');
     Route::put('ratings/{rating}', [RatingController::class, 'update'])->name('ratings.update');
     Route::delete('ratings/{rating}', [RatingController::class, 'destroy'])->name('ratings.destroy');
-
+    
     // Comment routes
     Route::post('books/{book}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::put('comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::delete('comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
-
+    
     // Review routes
     Route::post('reviews', [ReviewController::class, 'store'])->name('reviews.store');
-
+    
     // User book loan actions
     Route::post('book-loans/{bookLoan}/return', [BookLoanController::class, 'return'])->name('book-loans.return');
 
@@ -83,7 +80,7 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->prefix
     Route::post('/book-loans/{bookLoan}/reject', [App\Http\Controllers\Admin\BookLoanController::class, 'reject'])->name('book-loans.reject');
     Route::post('/book-loans/{bookLoan}/approve-return', [App\Http\Controllers\Admin\BookLoanController::class, 'approveReturn'])->name('book-loans.approve-return');
     Route::post('/book-loans/{bookLoan}/reject-return', [App\Http\Controllers\Admin\BookLoanController::class, 'rejectReturn'])->name('book-loans.reject-return');
-
+    
     // Admin reviews routes
     Route::resource('reviews', AdminReviewController::class)->only(['index', 'show', 'destroy']);
 });

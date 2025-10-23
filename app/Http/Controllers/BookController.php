@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,42 +34,24 @@ class BookController extends Controller
         return view('book-loans.create');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'description' => 'required|string',
+            'quantity' => 'required|integer|min:0',
+            'published_date' => 'nullable|date',
+        ]);
 
-    // ! create multipie books
-    public function storeMultiple(Request $request)
-{
-    $validated = $request->validate([
-        'books' => 'required|array',
-        'books.*.title' => 'required|string|max:255',
-        'books.*.author' => 'required|string|max:255',
-        'books.*.description' => 'nullable|string',
-        'books.*.quantity' => 'required|integer|min:0',
-        'books.*.published_date' => 'nullable|date',
-        'books.*.cover_image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-    ]);
+        Book::create($validated);
 
-    $savedBooks = [];
-
-    foreach ($validated['books'] as $bookData) {
-        // upload cover jika ada
-        if (isset($bookData['cover_image'])) {
-            $coverPath = $bookData['cover_image']->store('cover', 'public');
-            $bookData['cover_image'] = str_replace('cover/', '', $coverPath);
-        }
-
-        $savedBooks[] = Book::create($bookData);
+        return redirect()->route('books.index')
+            ->with('success', 'Book created successfully.');
     }
-
-    response()->json([
-        'success' => true,
-        'message' => 'Books successfully saved',
-        'data' => $savedBooks
-    ]);
-
-    return redirect('/books');
-
-}
-
 
     /**
      * Display the specified resource.

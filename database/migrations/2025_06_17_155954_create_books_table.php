@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
-            $table->text('description')->nullable(); // bisa kosong
+            $table->text('description');
             $table->integer('quantity')->default(0);
             $table->date('published_date')->nullable();
-            $table->string('cover_image')->nullable(); // path gambar
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }
