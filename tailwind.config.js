@@ -4,6 +4,8 @@ export default {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
+      "./src/**/*.{js,ts,jsx,tsx}",
+     "./public/index.html",
   ],
   theme: {
     extend: {},
@@ -11,4 +13,4 @@ export default {
   plugins: [
     require('@tailwindcss/forms'),
   ],
-} 
+}
