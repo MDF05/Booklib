@@ -1,9 +1,9 @@
 {
   "build": {
     "builder": "nixpacks",
-    "buildCommand": "composer install --no-dev --prefer-dist && php artisan key:generate && php artisan config:cache && php artisan route:cache && php artisan view:cache && php artisan migrate --force"
+    "buildCommand": "composer install --no-dev --prefer-dist && php artisan key:generate && php artisan config:cache && php artisan route:cache && php artisan view:cache"
   },
   "deploy": {
-    "startCommand": "vendor/bin/heroku-php-apache2 public/"
+    "startCommand": "php artisan migrate --force --no-interaction && vendor/bin/heroku-php-apache2 public/"
   }
 }
