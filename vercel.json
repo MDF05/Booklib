@@ -29,7 +29,6 @@
     ],
     "public": true,
     "buildCommand": "npm install && npm run build",
-    "installCommand": "composer install --optimize-autoloader --no-dev",
     "outputDirectory": "public",
     "env": {
         "APP_ENV": "production",
