@@ -1,67 +1,69 @@
 {
-    "version": 2,
-    "framework": null,
-    "functions": {
-        "api/index.php": {
-            "runtime": "vercel-php@0.6.2",
-            "includeFiles": "public/build/**"
-        }
-    },
-    "routes": [
-        {
-            "src": "/build/(.*)",
-            "dest": "/public/build/$1",
-            "headers": {
-                "Cache-Control": "public, max-age=31536000, immutable"
-            }
-        },
-        {
-            "src": "/assets/(.*)",
-            "dest": "/public/build/assets/$1",
-            "headers": {
-                "Cache-Control": "public, max-age=31536000, immutable"
-            }
-        },
-        {
-            "src" : "/storage/cover/",
-             "dest": "/public/storage/cover/"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/api/index.php",
-                "headers": {
-                "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
-                "X-Content-Type-Options": "nosniff",
-                "X-Frame-Options": "DENY",
-                "X-XSS-Protection": "1; mode=block",
-                "Referrer-Policy": "strict-origin-when-cross-origin"
-            }
-        }
-    ],
-    "public": true,
-    "buildCommand": "npm install && npm run build",
-    "outputDirectory": "public",
-    "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "false",
-        "APP_URL": "https://booklib-six.vercel.app",
-        "APP_KEY": "base64:b8W5CioBFUmMIKLNxTfC3kS9CCFwuKhe7rBLg/HDkeQ=",
-        "APP_CONFIG_CACHE": "/tmp/config.php",
-        "APP_EVENTS_CACHE": "/tmp/events.php",
-        "APP_PACKAGES_CACHE": "/tmp/packages.php",
-        "APP_ROUTES_CACHE": "/tmp/routes.php",
-        "APP_SERVICES_CACHE": "/tmp/services.php",
-        "VIEW_COMPILED_PATH": "/tmp",
-        "CACHE_DRIVER": "array",
-        "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
-        "DB_PORT": "4000",
-        "DB_DATABASE": "test",
-        "DB_USERNAME": "45eAGhq2sUVJiTk.root",
-        "DB_PASSWORD": "8kGYjeDTI9jMzfKp",
-        "DB_SSL_MODE": "required",
-        "DB_SSL_CA":"certs/tidb.pem"
+  "version": 2,
+  "framework": null,
+  "functions": {
+    "api/index.php": {
+      "runtime": "vercel-php@0.6.2",
+      "includeFiles": "public/build/**"
     }
+  },
+  "routes": [
+    {
+      "src": "/build/(.*)",
+      "dest": "/public/build/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/build/assets/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    },
+
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php",
+      "headers": {
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "X-XSS-Protection": "1; mode=block",
+        "Referrer-Policy": "strict-origin-when-cross-origin"
+      }
+    }
+  ],
+  "public": true,
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "public",
+  "env": {
+    "APP_ENV": "production",
+    "APP_DEBUG": "false",
+    "APP_URL": "https://booklib-six.vercel.app",
+    "APP_KEY": "base64:b8W5CioBFUmMIKLNxTfC3kS9CCFwuKhe7rBLg/HDkeQ=",
+    "APP_CONFIG_CACHE": "/tmp/config.php",
+    "APP_EVENTS_CACHE": "/tmp/events.php",
+    "APP_PACKAGES_CACHE": "/tmp/packages.php",
+    "APP_ROUTES_CACHE": "/tmp/routes.php",
+    "APP_SERVICES_CACHE": "/tmp/services.php",
+    "VIEW_COMPILED_PATH": "/tmp",
+    "CACHE_DRIVER": "array",
+    "LOG_CHANNEL": "stderr",
+    "SESSION_DRIVER": "cookie",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
+    "DB_PORT": "4000",
+    "DB_DATABASE": "test",
+    "DB_USERNAME": "45eAGhq2sUVJiTk.root",
+    "DB_PASSWORD": "8kGYjeDTI9jMzfKp",
+    "DB_SSL_MODE": "required",
+    "DB_SSL_CA":"certs/tidb.pem"
+  }
 }
