@@ -8,17 +8,20 @@
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/public/build/$1"
+            "dest": "/public/build/"
         },
         {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
     ],
+    "public" : true,
+    "buildComand" : "vite build",
+    "outputDirectory" : "public",
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "false",
-        "APP_URL": "https://yourprojectdomain.com",
+        "APP_URL": "https://booklib-six.vercel.app/",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
