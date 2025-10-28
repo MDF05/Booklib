@@ -10,12 +10,11 @@ if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php'))
     require $maintenance;
 }
 
-// Gunakan Document Root yang sudah didefinisikan untuk path yang solid
-$root = $_SERVER['DOCUMENT_ROOT'];
-
 // Register the Composer autoloader...
-require $root.'/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 // Bootstrap Laravel and handle the request...
 /** @var Application $app */
-$app = require_once $root.'/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
+
+$app->handleRequest(Request::capture());
