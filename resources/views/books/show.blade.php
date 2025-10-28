@@ -17,7 +17,7 @@
                 <div class="lg:w-1/3">
                     <div class="aspect-w-2 aspect-h-3 rounded-lg overflow-hidden shadow-lg relative group">
                         @if ($book->cover_image)
-                            <img src="{{ asset('storage/cover/' . $book->cover_image) }}" alt="{{ $book->title }}"
+                            <img src="{{ asset('images/cover/' . $book->cover_image) }}" alt="{{ $book->title }}"
                                 class="w-full h-full object-cover">
                         @else
                             <div

@@ -57,7 +57,7 @@
                         <div class="w-full aspect-w-2 aspect-h-3 bg-gray-100 flex items-center justify-center relative"
                             style="min-height: 240px; max-height: 320px;">
                             @if ($book->cover_image)
-                                <img src="{{ asset('storage/cover/' . $book->cover_image) }}" alt="{{ $book->title }}"
+                                <img src="{{ asset('images/cover/' . $book->cover_image) }}" alt="{{ $book->title }}"
                                     class="object-cover w-full h-full" style="max-height: 320px; min-height: 240px;"
                                     loading="lazy">
                             @else
