@@ -47,8 +47,10 @@
         "DB_CONNECTION": "mysql",
         "DB_HOST": "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
         "DB_PORT": "4000",
-        "DB_DATABASE": "45eAGhq2sUVJiTk.root",
-        "DB_USERNAME": "8kGYjeDTI9jMzfKp",
-        "DB_PASSWORD": ""
+        "DB_DATABASE": "test",
+        "DB_USERNAME": "45eAGhq2sUVJiTk.root",
+        "DB_PASSWORD": "8kGYjeDTI9jMzfKp",
+        "DB_SSL_MODE": "required",
+        "DB_SSL_CA":"certs/tidb.pem"
     }
 }
